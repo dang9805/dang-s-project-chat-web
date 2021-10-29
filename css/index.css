@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    height: 100%;
+    width:100%;
+}
+
+/* -----------------------index.html........................................... */
+
+.black-small-line{
+    width: 75%;
+    height: 1px;
+    background-color: lightgray;
+}
+
+#app{
+    height: 100%;
+    width: 100%;
+}
