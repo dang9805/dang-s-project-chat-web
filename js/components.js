@@ -78,4 +78,23 @@ components.loginPage = `
 
 components.chatPage = `
     // copy tất cả hết mục html body của body (temp3.html)
+    <div id="chat-container">
+        <div id="user-box">
+            <p>hello world</p>
+        </div>
+        <div id="chat-box">
+            <div id="conversation-detail">
+                <p>TÊN NGƯỜI CHAT ĐIỀN VÀO ĐÂYYYYYYYYYYYYYYY</p>
+            </div>
+
+            <div id="list-message">
+                
+            </div>
+
+            <form id="send-message-form">
+                <input type="text" placeholder="Nhập tin nhắn" name="message">
+                <button id="send-message-btn">Gửi</button>
+            </form>
+        </div>
+    </div>
 `

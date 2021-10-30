@@ -1,4 +1,5 @@
 const model = {}
+model.currentUser = {}
 model.register = ({username, email, password}) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
   .then((userCredential) => {
