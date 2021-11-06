@@ -39,7 +39,7 @@ components.registerPage = `
         <div class="register-form">
             <button id="register-btn" type="submit">Đăng ký</button>
 
-            <p style="margin: 20px;">Chưa có tài khoảng <a id="redirect-login">Đăng ký</a></p>
+            <p style="margin: 20px;">Chưa có tài khoảng <a id="redirect-login">Đăng nhập</a></p>
             
         </div>      
     </form>
@@ -70,31 +70,65 @@ components.loginPage = `
 
                 <div class="login-form">
                     <button id="login-btn" type="submit" >Đăng nhập</button>
-                        <p style="margin: 20px;">Có tài khoảng rồi: <a id="redirect-register">Đăng nhập</a></p>
-            </div>
-        </form>
+                        <p style="margin: 20px;">Có tài khoảng rồi: <a id="redirect-register">Đăng ký</a></p>
+                </div>
+            </form>
+        </div>
     </div>
 `
 
 components.chatPage = `
-    // copy tất cả hết mục html body của body (temp3.html)
-    <div id="chat-container">
-        <div id="user-box">
-            <p>hello world</p>
+<div id="chat-container">
+<div id="user-box">
+    <div id="chatPage-list-chat">
+        <div class="create-conversation">
+            <button class="btn cursor-pointer">Tạo đoạn chat</button>
         </div>
-        <div id="chat-box">
-            <div id="conversation-detail">
-                <p>TÊN NGƯỜI CHAT ĐIỀN VÀO ĐÂYYYYYYYYYYYYYYY</p>
+
+        <div class="list-conversations">
+            <div class="conversation">
+                <div class="left-conversation-title">
+                    first title
+                </div>
+                <div class=num-of-user>
+                    2 users
+                </div>
             </div>
 
-            <div id="list-message">
-                
+            <div class="conversation">
+                <div class="left-conversation-title">
+                    second title
+                </div>
+                <div class=num-of-user>
+                    69 users
+                </div>
             </div>
-
-            <form id="send-message-form">
-                <input type="text" placeholder="Nhập tin nhắn" name="message">
-                <button id="send-message-btn">Gửi</button>
-            </form>
         </div>
     </div>
+
+    
+    <div id="setting-box">
+        <p>test 2</p>
+        <div id="login-register-btn-box">
+            <button id="login-btn" class="login-register-btn">Đăng nhập</button>
+            <button id="register-btn" class="login-register-btn">Đăng ký</button>
+        </div>
+    </div>
+</div>
+
+<div id="chat-box">
+    <div id="conversation-detail">
+        <p>TÊN NGƯỜI CHAT ĐIỀN VÀO ĐÂYYYYYYYYYYYYYYY</p>
+    </div>
+
+    <div class="list-messages">
+
+    </div>
+
+    <form id="send-message-form">
+        <input type="text" placeholder="Nhập tin nhắn" name="">
+        <button id="send-message-btn">Gửi</button>
+    </form>
+</div>
+</div>
 `

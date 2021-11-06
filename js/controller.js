@@ -59,17 +59,22 @@ controller.register = (
   }
 }
 
-controller.login = ({email, password}) => {
-  if(email === ''){
+controller.login = (dataLogin) => {
+  if(dataLogin.email === ''){
     document.getElementById("email-error").innerHTML = 'Vui lòng nhập email'
   } else{
     document.getElementById("email-error").innerHTML = ''
   }
 
-  if(password === '') {
+  if(dataLogin.password === '') {
     document.getElementById('password-error').innerHTML = 'Vui lòng nhập lại mật khẩu'
   } else {
     // view.setErrorMessage('password-error','')
     document.getElementById('password-error').innerHTML = ''
+  }
+
+  if(dataLogin.email !== '' && dataLogin.password !== '') {
+    console.log("chuyen toi model");
+    model.login(dataLogin)
   }
 }

@@ -1,4 +1,6 @@
 const init = () => {
+
+  // khởi tạo firebase
   const firebaseConfig = {
     apiKey: "AIzaSyC3Im-z6R-P0I0-CIeKLihsv4uj-b_GuLM",
     authDomain: "project-chat-web.firebaseapp.com",
@@ -8,62 +10,45 @@ const init = () => {
     appId: "1:511136054736:web:7754cf70b72dd1def38dd5"
   };
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    console.log(firebase.app().name)
-    firebase.auth().onAuthStateChanged((res) => {
-      console.log(res)
-      if (res) {
-        if (res.emailVerified) {
-          model.currentUser = {
-            displayName: res.displayName,
-            email: res.email
-          }
-          console.log(model.currentUser)
-          view.setActiveScreen('chatPage')
-        } else {
-          view.setActiveScreen('loginScreen')
-          alert('Vui lòng xác nhận email')
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  console.log(firebase.app().name)
+
+  firebase.auth().onAuthStateChanged((user) => {
+    console.log(user)
+      if (user &&user.emailVerified) {
+        model.currentUser = {
+          displayName: user.displayName,
+          email: user.email
         }
+        console.log(model.currentUser)
+        view.setActiveScreen('chatPage')
       } else {
-        view.setActiveScreen('registerPage')
-      }
-    })
+        view.setActiveScreen('loginPage')
+      } 
+  })
+
 }
 
 window.onload = init
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyC3Im-z6R-P0I0-CIeKLihsv4uj-b_GuLM",
-//   authDomain: "project-chat-web.firebaseapp.com",
-//   projectId: "project-chat-web",
-//   storageBucket: "project-chat-web.appspot.com",
-//   messagingSenderId: "511136054736",
-//   appId: "1:511136054736:web:7754cf70b72dd1def38dd5"
-// };
+// tham khảo firebase C/R/U/D
+// firestoreQueries = async () => {
+//   // get many document
+//   const response = await firebase.firestore().collection('users').get()
+//   console.log(response.docs[0].data())
+//   const users = getDataFromDocs(response.docs)
+//   console.log(users);
 
-
-
-//   // // Initialize Firebase
-//   const app = initializeApp(firebaseConfig);
-  
-  
-firestoreQueries = async () => {
-  //get one document
-  const response = await firebase.firestore().collection('users').doc('tDsyFi4yskud1mvxYG7T').get()
-  // get many document
-
-  // add new document
-  // update document
-  // delate document
-}
+// }
 
 getDataFromDoc = (res) => {
-  const data = res.data()
+  const data =res.data()
   data.id = res.id
   return data
 }
 
 getDataFromDocs = (docs) => {
-  return docs.map(getDataFromDoc)
+  const arr = []
+  console.log(docs)
 }
