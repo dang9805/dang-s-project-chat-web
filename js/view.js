@@ -55,6 +55,10 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
         document.getElementById('login-btn').addEventListener('click', () => {
           view.setActiveScreen('loginPage')
         })
+
+        document.querySelector('#create-conversation-btn').addEventListener("click", ()=> {
+          view.setActiveScreen("createConversationScreen")
+        })
         const sendMessageForm = document.getElementById('send-message-form')
         sendMessageForm.addEventListener("submit", (event) => {
           event.preventDefault()
@@ -63,7 +67,7 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
           const messageSend = {
             owner: model.currentUser.email,
             content: message,
-            createAt: new Date().toISOString()
+            createdAt: new Date().toISOString()
           }
 
           if(message.trim() !== ''){
@@ -75,11 +79,55 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
           }
         })
 
-        // lấy các cuộc hội thoại về
-        model.getConversations()
-        // lắng nghe các thay đôi trong cuộc hội thoại
-        model.listenConversationChange()
+        if(!fromCreate) {
+          // lay cac cuoc hoi thoai ve
+          model.getConversations()
+          // lang nghe thay doi cua cac cuoc hoi thoai
+          model.listenConversationChange()
+        } else {
+          view.showCurrentConversation()
+          view.showListConversation()
+        }
 
+        const addUserForm = document.getElementById('add-user-form')
+        addUserForm.addEventListener('submit', (e) => {
+          e.preventDefault()
+          const email = addUserForm.email.value
+          if(email !== '') {
+            model.addUser(email)
+          }
+          addUserForm.email.value = ''
+        })
+        document.querySelector('#send-message-form input').addEventListener('click', () => {
+          view.hideNotification(model.currentConversation.id)
+        })
+
+        // // lấy các cuộc hội thoại về
+        // model.getConversations()
+        // // lắng nghe các thay đôi trong cuộc hội thoại
+        // model.listenConversationChange()
+
+        const mediaQuery = window.matchMedia('screen and (max-width: 768px)')
+      console.log(mediaQuery)
+      if(mediaQuery.matches) {
+        document.querySelector('#create-conversation-btn').innerHTML ='<i class="fa fa-plus-circle" aria-hidden="true"></i>'
+      }
+      break
+
+      case 'createConversationScreen' : 
+        document.getElementById("app").innerHTML = components.createConversationScreen
+        document.querySelector('#return-chat').addEventListener("click", ()=> {
+          view.setActiveScreen("chatPage")
+        })
+        const createConversationForm = document.querySelector('.create-conversation-form')
+        createConversationForm.addEventListener('submit', (event) => {
+          event.preventDefault()
+          const data = {
+            title: createConversationForm.title.value,
+            email: createConversationForm.email.value
+          }
+          controller.createConversation(data)
+        })
       break
   }
 }
@@ -103,21 +151,21 @@ view.addMessage = (message) => {
     <div class="message-contents">${message.content}</div>
     `
   }
-  console.log(messageWrapper)
+  // console.log(messageWrapper)
   document.querySelector('.list-messages').appendChild(messageWrapper)
 }
 
 view.showCurrentConversation = () => {
   document.querySelector('.list-messages').innerHTML = ''
-  document.querySelector('.list-users').innerHTML = ''
+  document.querySelector('.list-users').innerHTML = '' // hiện đang ko có class nào tên là list-users :))
   document.querySelector('.conversation-title').innerHTML = model.currentConversation.title
   for(const oneMessage of model.currentConversation.messages) {
     view.addMessage(oneMessage)
   }
-  // for(const user of model.currentConversation.users) {
-  //   view.addUser(user)
-  // }
-  // view.scrollToEndElm()
+  for(const user of model.currentConversation.users) {
+    view.addUser(user)
+  }
+  view.scrollToEndElm()
 }
 
 view.showListConversation = () => {
@@ -139,11 +187,11 @@ view.addConversation = (conversation) => {
   conversationWrapper.innerHTML = `
   <div class="left-conversation-title">
     ${conversation.title}
+    <div class="notification"></div>
   </div>
   <div class="num-of-user">
     ${conversation.users.length} users
   </div>
-  <div class="notification"></div>
 `
 
   // thêm lên trên giao diện
@@ -162,10 +210,31 @@ view.addConversation = (conversation) => {
         view.showCurrentConversation()
       }
     }
+    view.hideNotification(conversation.id)
   })
 }
 
 view.scrollToEndElm = () => {
   const elm = document.querySelector('.list-messages')
   elm.scrollTop = elm.scrollHeight
+}
+
+view.addUser = (user) => {
+  const userElement = document.createElement('div')
+  // userElement = <div></div>
+  userElement.classList.add('user')
+  // userElement = <div class="user"></div>
+  userElement.innerText = user
+  // userElement = <div class="user">khiemnb2705@gmail.com</div>
+  document.querySelector('.list-users').appendChild(userElement)
+}
+
+view.showNotification = (id) => {
+  const conversationElement = document.getElementById(id)
+  // conversationElement.lastElementChild.style = 'display: block'
+  conversationElement.querySelector('.notification').style = 'display: block'
+}
+view.hideNotification = (id) => {
+  const conversationElement = document.getElementById(id)
+  conversationElement.querySelector('.notification').style = 'display: none'
 }

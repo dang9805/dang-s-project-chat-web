@@ -39,7 +39,7 @@ components.registerPage = `
         <div class="register-form">
             <button id="register-btn" type="submit">Đăng ký</button>
 
-            <p style="margin: 20px;">Chưa có tài khoảng <a id="redirect-login">Đăng nhập</a></p>
+            <p style="margin: 20px;">Đã có tài khoản : <a id="redirect-login">Đăng nhập</a></p>
             
         </div>      
     </form>
@@ -70,7 +70,7 @@ components.loginPage = `
 
                 <div class="login-form">
                     <button id="login-btn" type="submit" >Đăng nhập</button>
-                        <p style="margin: 20px;">Có tài khoảng rồi: <a id="redirect-register">Đăng ký</a></p>
+                        <p style="margin: 20px;">Chưa tài khoảng : <a id="redirect-register">Đăng ký</a></p>
                 </div>
             </form>
         </div>
@@ -82,25 +82,21 @@ components.chatPage = `
 <div id="user-box">
     <div id="chatPage-list-chat">
         <div class="create-conversation">
-            <button class="btn cursor-pointer">Tạo đoạn chat</button>
+            <button class="btn cursor-pointer" id="create-conversation-btn">Tạo đoạn chat mới</button>
         </div>
 
         <div class="list-conversations">
             <div class="conversation">
                 <div class="left-conversation-title">
-                    first title
                 </div>
                 <div class=num-of-user>
-                    2 users
                 </div>
             </div>
 
             <div class="conversation">
                 <div class="left-conversation-title">
-                    second title
                 </div>
                 <div class=num-of-user>
-                    69 users
                 </div>
             </div>
         </div>
@@ -108,17 +104,15 @@ components.chatPage = `
 
     
     <div id="setting-box">
-        <p>test 2</p>
         <div id="login-register-btn-box">
-            <button id="login-btn" class="login-register-btn">Đăng nhập</button>
-            <button id="register-btn" class="login-register-btn">Đăng ký</button>
+            <button id="login-btn" class="login-register-btn">Đăng nhập tài khoản khác</button>
+            <button id="register-btn" class="login-register-btn">Đăng xuất</button>
         </div>
     </div>
 </div>
 
 <div id="chat-box">
-    <div id="conversation-detail">
-        <p>TÊN NGƯỜI CHAT ĐIỀN VÀO ĐÂYYYYYYYYYYYYYYY</p>
+    <div class="conversation-title">
     </div>
 
     <div class="list-messages">
@@ -126,9 +120,53 @@ components.chatPage = `
     </div>
 
     <form id="send-message-form">
-        <input type="text" placeholder="Nhập tin nhắn" name="">
+        <input type="text" placeholder="Nhập tin nhắn" name="message">
         <button id="send-message-btn">Gửi</button>
     </form>
 </div>
+
+<div class="aside-right">
+            <div id="aside-right-title">
+                <h2 style="padding-left: 10px">Thành viên</h2>
+            </div>
+            <div class="list-users" style="padding-left: 5px;">
+            </div>
+            <form id = "add-user-form">
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Email bạn bè" name="email">
+                    <div class="error" id="add-user-email-error"></div>
+                </div>
+                <button class="btn" type="submit">Lưu</button>
+            </form>
+        </div>
+
+</div>
+`
+
+components.createConversationScreen = `
+<div class="create-conversation-container">
+<form class="create-conversation-form">
+    <div id="create-conversation-title">
+        <h4>Thêm 1 cuộc trò chuyện mới</h4>
+    </div>
+    <div class="input-wrapper">
+        <input type="text" name="title" placeholder="Tên đoạn chat">
+        <div id="conversation-title-error" class="err"></div>
+    </div>
+
+
+    <div class="input-wrapper">
+        <input type="text" name="email" placeholder="Email bạn bè">
+        <div id="conversation-email-error" class="err"></div>
+    </div>
+
+    <div class="black-small-line"></div>
+
+    <div class="action">
+        <button style="margin-right: 50px;" type="click">Lưu</button>
+        <button id="return-chat" style="margin-left: 50px;">Hủy</button>
+    </div>
+</form>
+
 </div>
 `

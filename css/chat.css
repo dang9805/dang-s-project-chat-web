@@ -5,6 +5,14 @@
     flex-flow: row;
 }
 
+#chat-container .notification{
+    width: 15px;
+    height: 15px;
+    background-color: #037BFE;
+    border-radius: 50%;
+
+}
+
 /* --------------------------left-container------------------------- */
 
 #user-box{
@@ -57,6 +65,23 @@
     border-bottom: 1px solid black;
 }
 
+.conversation .notification{
+    width: 15px;
+    height: 15px;
+    background-color: #037BFE;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: none;
+}
+
+.left-conversation-title{
+    width: 100%;
+    word-break: break-all;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+/* ------------------------phần setting ở dưới--------------------------- */
 
 #setting-box{
     height: 10%;
@@ -77,9 +102,8 @@
  }
 
  .login-register-btn{
-     height: 40%;
-     width: 70px;
-     margin: 0 5px 0 5px;
+     height: 50%;
+     width: 40%;
      border-radius: 5px;    
 }
 
@@ -87,12 +111,12 @@
 
 #chat-box{
     height: 100%;
-    width: 80%;
+    width: 60%;
     display: flex;
     flex-flow:column;
 }
 
-#conversation-detail{
+.conversation-title{
     width: 100%;
     height: 10%;
     display:flex;
@@ -102,6 +126,7 @@
     border-bottom: 2px solid gray;
     background-image: url(../img/photo-collection-backgrounds-background-minimal.jpg);
     background-size: cover;
+    font-size: 30px;
 }
 
 .list-messages{
@@ -117,14 +142,17 @@
  .message-container-mine{
     max-width: 100%;
     display: flex;
-    justify-content: flex-end;    
+    justify-content: flex-end;
+    word-break: break-all;
  }
 
 
  .message-cotainer-other{
      max-width: 100%;
      display: flex;
-     flex-flow: column;
+    justify-content: flex-start;
+    word-break: break-all;
+
  }
 
  .list-messages .message-contents{
@@ -133,6 +161,8 @@
      background-color: #037BFE;
      max-width: 45%;
      width: max-content;
+    word-break: break-all;
+
  }
 
  .message-container-other #other-name{
@@ -165,3 +195,136 @@
     height: 35%;
     border-radius: 5px;
 }
+
+/* ---------------aside-right--------------------- */
+
+.aside-right{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    border-left: 2px solid black;
+}
+
+#aside-right-title{
+    height: 10%;
+    width: 100%;
+    border-bottom: 1px solid black;
+
+}
+
+/* .list-users{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-flow: column;
+    border-bottom: 1px solid black;
+} */
+
+#add-user-form{
+    width: 100%;
+    height: fit-content;
+    padding: 10px 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+ }
+
+ #add-user-form .input-wrapper{
+     height: 50%;
+     width: 100%;
+     display: flex;
+     flex-flow: column;
+     align-items: center;
+     margin-bottom: 10px;
+
+ }
+
+ #add-user-form .input-wrapper input{
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+ }
+
+#add-user-form button{
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+
+}
+
+
+/* ----------------------------create conversations---------------------------------- */
+
+.create-conversation-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    /* align-items: center; */
+}
+
+.create-conversation-form{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-flow: column;
+    /* justify-content: space-around; */
+    align-items: center;
+}
+
+#create-conversation-title{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/photo-collection-backgrounds-background-minimal.jpg);
+    background-size: cover;
+    border-bottom: 2px solid black;
+    font-size: 50px;
+}
+.create-conversation-form .input-wrapper{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+ .create-conversation-form .input-wrapper input{
+     width: 50%;
+     height: 30%;
+     border-radius: 5px;
+ }
+
+ .action{
+     width: 100%;
+     height: 20%;
+     display: flex;
+     flex-flow: row;
+     align-items: center;
+     justify-content: center;
+
+ }
+
+ .action button{
+    width: 80px;
+    height: 50%;
+    border-radius: 5px;
+ }
+
+ @media only screen and (max-width: 768px) {
+    .chat-container .aside-right {
+      display: none;
+    }
+    .chat-container .conversation-title{
+      width: 85%;
+    }
+    .num-of-user{
+      display: none;
+    }
+  }

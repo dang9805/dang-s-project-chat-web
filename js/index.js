@@ -49,6 +49,7 @@ getDataFromDoc = (res) => {
 }
 
 getDataFromDocs = (docs) => {
-  const arr = []
-  console.log(docs)
+  // const arr = []
+  // console.log(docs) // chưa return gì nhé (hàm ko có trả về gì nên => khi em gọi hàm web sẽ ko hiểu)
+  return docs.map(item => getDataFromDoc(item)); // về tìm hiểu thêm hàm map() trong js;
 }

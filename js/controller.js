@@ -78,3 +78,28 @@ controller.login = (dataLogin) => {
     model.login(dataLogin)
   }
 }
+
+controller.createConversation = ({title, email}) => {
+  if(email === '') {
+    // view.setErrorMessage('conversation-email-error', 'Vui lòng')
+    document.getElementById("conversation-email-error").innerHTML = 'Vui lòng nhập email'
+
+  } else if(!validateEmail(email)) {
+    // view.setErrorMessage('conversation-email-error', 'Invalid email')
+    document.getElementById("conversation-email-error").innerHTML = 'Email không chính xác'
+  } else {
+    // view.setErrorMessage('conversation-email-error', '')
+    document.getElementById("conversation-email-error").innerHTML = ''
+  }
+  const messageTile = title === '' ? 'Vui lòng nhập tên' : ''
+  view.setErrorMessage('conversation-title-error', messageTile)
+  if(email !== '' && validateEmail(email) && title !== '') {
+    model.addConversation(title, email)
+  }
+}
+
+
+function validateEmail(email) {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
